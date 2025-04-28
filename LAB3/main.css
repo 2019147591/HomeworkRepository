@@ -1,0 +1,175 @@
+/* 리셋 & 박스 모델 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* 공통 컨테이너: 최대 너비 1020px 유지 */
+  .container {
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* 헤더 & 네비게이션 */
+  .header {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    overflow: hidden; /* 슬라이드 텍스트 잘림 방지 */
+  }
+  
+  .slide-header {
+    display: inline-block;
+    white-space: nowrap;
+    animation-name: slideHeader;
+    animation-duration: 2s;
+  }
+  
+  @keyframes slideHeader {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+  }
+  
+  .nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .nav a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .nav a.active {
+    font-weight: bold;
+  }
+  
+  /* 영화 섹션: 4단계 중첩 flex */
+  .movies-section {
+    display: flex;             /* 1 */
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+  }
+  
+  .movie-list {
+    display: flex;             /* 2 */
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .movie-list .movie-item {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .movie-media {
+    display: flex;             /* 4 */
+    justify-content: center;
+  }
+  
+  .movie-media img {
+    width: 100%;
+    display: block;
+    transition: transform 2s;
+  }
+  
+  .movie-item:hover .movie-media img {
+    transform: scale(1.2);
+  }
+  
+  .movie-title {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 5px 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .movie-item:hover .movie-title {
+    opacity: 1;
+  }
+  
+  /* About 섹션 */
+  .about {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .about-content {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .about .column {
+    width: 48%;
+    line-height: 1.6;
+  }
+  
+  /* 폼 스타일 (login/signup) */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    margin: 20px auto;
+  }
+  
+  .form label {
+    font-weight: bold;
+  }
+  
+  .form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .form button:hover {
+    background-color: #555;
+  }
+  
+  /* 미디어 쿼리: 3단계 레이아웃 변경 */
+  @media (max-width: 480px) {
+    .nav { flex-direction: column; }
+    .movie-list { flex-direction: column; }
+    .about { flex-direction: column; }
+    .about .column { width: 100%; }
+  }
+  
+  @media (min-width: 481px) and (max-width: 800px) {
+    .movie-list {
+      flex-wrap: wrap;
+    }
+    .movie-item {
+      width: 45%;
+    }
+    .about { flex-direction: column; }
+    .about .column { width: 100%; }
+  }
+  
+  @media (min-width: 801px) {
+    .movie-list { flex-wrap: nowrap; }
+  }
+  
